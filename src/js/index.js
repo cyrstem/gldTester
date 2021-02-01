@@ -58,8 +58,9 @@ function init(){
 
 		console.log( 'An error happened' );
 
-	}); 
-//
+    }); 
+    
+// DATA GUI CONTENT
 const options = {
     velx:0,
     vely:0,
@@ -71,6 +72,11 @@ const options = {
         this.vely = 0;
     }
 };
+//data gui 
+    const gui = new GUI();
+ let cam = gui.addFolder('Camara Settings');
+ cam.add(options.camera, 'speed',0,0.0010).listen();
+
 
 
 

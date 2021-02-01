@@ -41811,7 +41811,7 @@ function init() {
   }, // called when loading has errors
   function (error) {
     console.log('An error happened');
-  }); //
+  }); // DATA GUI CONTENT
 
   var options = {
     velx: 0,
@@ -41823,7 +41823,11 @@ function init() {
       this.velx = 0;
       this.vely = 0;
     }
-  }; //tester element
+  }; //data gui 
+
+  var gui = new _datGui.GUI();
+  var cam = gui.addFolder('Camara Settings');
+  cam.add(options.camera, 'speed', 0, 0.0010).listen(); //tester element
 
   var geometry = new THREE.BoxGeometry();
   var material = new THREE.MeshBasicMaterial({
@@ -41900,7 +41904,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44609" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39901" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
