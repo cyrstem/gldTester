@@ -1,0 +1,8 @@
+# dependencies
+node_modules
+.cache/
+.cache
+
+# logs
+npm-debug.log
+package-lock.json
