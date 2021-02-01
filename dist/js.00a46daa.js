@@ -41773,7 +41773,7 @@ function init() {
   var container = document.createElement('div');
   document.body.appendChild(container);
   camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.25, 20);
-  camera.position.set(0, 2, 100);
+  camera.position.set(0, 2, 50);
   scene = new THREE.Scene(); //Lights
 
   var shadowlight = new THREE.DirectionalLight(0xffffff, 1.8);
@@ -41811,7 +41811,19 @@ function init() {
   }, // called when loading has errors
   function (error) {
     console.log('An error happened');
-  }); //tester element
+  }); //
+
+  var options = {
+    velx: 0,
+    vely: 0,
+    camera: {
+      speed: 0.001
+    },
+    stop: function stop() {
+      this.velx = 0;
+      this.vely = 0;
+    }
+  }; //tester element
 
   var geometry = new THREE.BoxGeometry();
   var material = new THREE.MeshBasicMaterial({
@@ -41850,6 +41862,7 @@ function onWindowResize() {
 }
 
 function render() {
+  requestAnimationFrame(render);
   renderer.render(scene, camera);
 }
 
@@ -41887,7 +41900,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44901" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44609" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

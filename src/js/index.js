@@ -10,7 +10,7 @@ function init(){
     const container = document.createElement('div');
     document.body.appendChild( container );
     camera = new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight, 0.25,20)
-    camera.position.set (0, 2 ,100);
+    camera.position.set (0, 2 ,50);
     scene= new THREE.Scene();
 
     //Lights
@@ -59,6 +59,18 @@ function init(){
 		console.log( 'An error happened' );
 
 	}); 
+//
+const options = {
+    velx:0,
+    vely:0,
+    camera: {
+        speed:0.001
+    },
+    stop:function() {
+        this.velx = 0;
+        this.vely = 0;
+    }
+};
 
 
 
@@ -101,7 +113,7 @@ function onWindowResize() {
             }
 
 function render() {
-
+                requestAnimationFrame(render);
 				renderer.render( scene, camera );
 
 			}
