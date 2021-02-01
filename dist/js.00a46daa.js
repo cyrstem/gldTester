@@ -41803,7 +41803,7 @@ function init() {
   //load model
 
   var loader = new _GLTFLoader.GLTFLoader();
-  loader.load('models/tester.gltf', function (gltf) {
+  loader.load('models/tester2.gltf', function (gltf) {
     gltf.scene.scale.set(0.4, 0.4, 0.4);
     scene.add(gltf.scene);
   }, function (xhr) {
@@ -41904,7 +41904,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39901" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36211" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

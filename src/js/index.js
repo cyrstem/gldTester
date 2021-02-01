@@ -45,7 +45,7 @@ function init(){
     //load model
 
     const loader = new GLTFLoader();
-    loader.load('models/tester.gltf', ( gltf ) => {
+    loader.load('models/tester2.gltf', ( gltf ) => {
         gltf.scene.scale.set(0.4,0.4,0.4) 
         scene.add( gltf.scene )
     },function ( xhr ) {
