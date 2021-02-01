@@ -4,7 +4,8 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-let camera, scene , renderer;
+let camera, scene , renderer, selection;
+
 
 function init(){
     const container = document.createElement('div');
@@ -25,8 +26,11 @@ function init(){
   
     let backLight = new THREE.DirectionalLight( 0xffffff, 1 );
 	backLight.position.set( -40, 100, 20 );
-	scene.add(backLight);
+    scene.add(backLight);
     //endLights
+
+
+
     //ADD floor
     // const ground = new THREE.PlaneGeometry( 500, 500, 1, 1 );
 	// const materials = new THREE.MeshBasicMaterial( { color: 0xF9F8ED } );
@@ -41,13 +45,32 @@ function init(){
 	// floor.doubleSided = true;
     // floor.receiveShadow = true;
 	// scene.add(floor);
+    //choose model
+    let listOfModels ={
+        'model1':'tester2.gltf',
+        'model2':'tester3.gltf'
+    };
+    selection = {
+        modelo: ['tester2.gltf','tester3.gltf']
+    };
+    
 
+    function modelosLoad(){
+        console.log("cambio");
+        
+    }
+  
     //load model
 
-    const loader = new GLTFLoader();
-    loader.load('models/tester2.gltf', ( gltf ) => {
+    const loader = new GLTFLoader().setPath('models/');
+
+
+    loader.load(selection.modelo[0], ( gltf ) => {
         gltf.scene.scale.set(0.4,0.4,0.4) 
-        scene.add( gltf.scene )
+        const modelo = gltf.scene
+        const elements = modelo.children
+        console.log(elements)
+        scene.add( modelo )
     },function ( xhr ) {
 
 		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
@@ -56,26 +79,25 @@ function init(){
 	// called when loading has errors
 	function ( error ) {
 
-		console.log( 'An error happened' );
+		console.log( 'No valio ' +error );
 
     }); 
     
 // DATA GUI CONTENT
-const options = {
+const settings = {
     velx:0,
     vely:0,
+    modelos: "modelo 1",
     camera: {
         speed:0.001
-    },
-    stop:function() {
-        this.velx = 0;
-        this.vely = 0;
     }
 };
 //data gui 
     const gui = new GUI();
- let cam = gui.addFolder('Camara Settings');
- cam.add(options.camera, 'speed',0,0.0010).listen();
+    let cam = gui.addFolder('Camara Settings');
+    let modelos = gui.addFolder('3d Models');
+    cam.add(settings.camera, 'speed',0,0.0010).listen();
+    modelos.add(settings, 'modelos',['modelo 1','modelo 2']).onChange(modelosLoad);
 
 
 
@@ -124,7 +146,7 @@ function render() {
 
 			}
 
-
+        
 
 window.onload = ()=> {
    console.clear();

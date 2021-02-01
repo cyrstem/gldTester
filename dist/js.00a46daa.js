@@ -41767,7 +41767,7 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-var camera, scene, renderer;
+var camera, scene, renderer, selection;
 
 function init() {
   var container = document.createElement('div');
@@ -41800,34 +41800,49 @@ function init() {
   // floor.doubleSided = true;
   // floor.receiveShadow = true;
   // scene.add(floor);
-  //load model
+  //choose model
 
-  var loader = new _GLTFLoader.GLTFLoader();
-  loader.load('models/tester2.gltf', function (gltf) {
+  var listOfModels = {
+    'model1': 'tester2.gltf',
+    'model2': 'tester3.gltf'
+  };
+  selection = {
+    modelo: ['tester2.gltf', 'tester3.gltf']
+  };
+
+  function modelosLoad() {
+    console.log("cambio");
+  } //load model
+
+
+  var loader = new _GLTFLoader.GLTFLoader().setPath('models/');
+  loader.load(selection.modelo[0], function (gltf) {
     gltf.scene.scale.set(0.4, 0.4, 0.4);
-    scene.add(gltf.scene);
+    var modelo = gltf.scene;
+    var elements = modelo.children;
+    console.log(elements);
+    scene.add(modelo);
   }, function (xhr) {
     console.log(xhr.loaded / xhr.total * 100 + '% loaded');
   }, // called when loading has errors
   function (error) {
-    console.log('An error happened');
+    console.log('No valio ' + error);
   }); // DATA GUI CONTENT
 
-  var options = {
+  var settings = {
     velx: 0,
     vely: 0,
+    modelos: "modelo 1",
     camera: {
       speed: 0.001
-    },
-    stop: function stop() {
-      this.velx = 0;
-      this.vely = 0;
     }
   }; //data gui 
 
   var gui = new _datGui.GUI();
   var cam = gui.addFolder('Camara Settings');
-  cam.add(options.camera, 'speed', 0, 0.0010).listen(); //tester element
+  var modelos = gui.addFolder('3d Models');
+  cam.add(settings.camera, 'speed', 0, 0.0010).listen();
+  modelos.add(settings, 'modelos', ['modelo 1', 'modelo 2']).onChange(modelosLoad); //tester element
 
   var geometry = new THREE.BoxGeometry();
   var material = new THREE.MeshBasicMaterial({
@@ -41904,7 +41919,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36211" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35875" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
