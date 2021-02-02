@@ -3,10 +3,18 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import  Stats  from 'three/examples/jsm/libs/stats.module'
 
 let camera, scene , renderer, selection, mesh, selected;
+let listofParts;
+let show;
 
 function init(){
+    show = true;
+    //let stats = new Stats()
+    //document.body.appendChild( stats.domElement)
+    mesh = new THREE.Object3D();
+
     const container = document.createElement('div');
     document.body.appendChild( container );
     camera = new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight, 0.25,20)
@@ -31,17 +39,11 @@ function init(){
 
     //choose model
     let listOfModels ={
-        'model1':'tester2.gltf',
-        'model2':'tester3.gltf',
-        'model3':'tester3.gltf',
-        'model4':'tester4.gltf'
+        'model1':'testModelA.gltf',
+        'model2':'testModelB.gltf'
     };
-    selection = {
-        modelo: ['tester2.gltf','tester3.gltf']
-    };
-
     selected = {
-        model: 'tester2.gltf'
+        model: 'testModelA.gltf'
     }
 
     function modelosLoad(){
@@ -50,29 +52,22 @@ function init(){
             case 'tester2.gltf':
         }    
     }
- 
+  
     
 // DATA GUI CONTENT
 const settings = {
     modelos:{
         model: 'tester2.gltf'
-    } 
+    },
+    visible: true
 };
 //data gui 
     const gui = new GUI();
     let modelos = gui.addFolder('3d Models');
-    //modelos.add(settings, 'modelos',['modelo 1','modelo 2']).onChange(modelosLoad);
     modelos.add(selected, 'model',listOfModels).onChange(loadModels)
+    let elements = gui.addFolder(" Partes ");
+    elements.add(settings, 'visible').onChange(showandhide)
 
-
-
-//tester element
-    const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshBasicMaterial( { color: 0x00ff00,shading: THREE.FlatShading } );
-    const cube = new THREE.Mesh( geometry, material );
-    cube.castShadow = true;
-    //scene.add( cube );
-//end tester element
 
     renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
@@ -102,15 +97,24 @@ function loadModels (){
     };
 
   const loader = new GLTFLoader().setPath('models/');
-    //loader.load(selection.modelo[1], ( gltf ) => {
         loader.load(selected.model, (gltf ) =>{
         gltf.scene.scale.set(0.4,0.4,0.4) 
         mesh = gltf.scene
-        const elements = gltf.scenes
-    
-        console.log(elements)
+        const parts = mesh.children
+        //console.log(parts.length)
+
        
+
+        for(let i = 0; i<parts.length; i++){
+           // console.log(parts[i].name)
+            //let cabeza = parts[i].getObjectByName("Cabeza_1")
+           
+        }
+        // listofParts =new Array(parts.length);
+        // console.log(listofParts.length);
+
         scene.add( mesh)
+
     },function ( xhr ) {
 
 		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
@@ -123,8 +127,16 @@ function loadModels (){
 
     }); 
 }
-
-
+function showandhide(show){
+console.log(show);
+if(show === true){
+    // cabeza.visible =true
+    mesh.getObjectByName("Cabeza_1").visible = true
+ }else{
+    // cabeza.visible= false
+    mesh.getObjectByName("Cabeza_1").visible = false
+ }
+}
 
 function onWindowResize() {
 
@@ -150,4 +162,5 @@ window.onload = ()=> {
     init();
     loadModels();
     render();
+
 }

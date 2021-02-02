@@ -41752,7 +41752,133 @@ var GLTFLoader = function () {
 }();
 
 exports.GLTFLoader = GLTFLoader;
-},{"../../../build/three.module.js":"../node_modules/three/build/three.module.js"}],"js/index.js":[function(require,module,exports) {
+},{"../../../build/three.module.js":"../node_modules/three/build/three.module.js"}],"../node_modules/three/examples/jsm/libs/stats.module.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var Stats = function () {
+  var mode = 0;
+  var container = document.createElement('div');
+  container.style.cssText = 'position:fixed;top:0;left:0;cursor:pointer;opacity:0.9;z-index:10000';
+  container.addEventListener('click', function (event) {
+    event.preventDefault();
+    showPanel(++mode % container.children.length);
+  }, false); //
+
+  function addPanel(panel) {
+    container.appendChild(panel.dom);
+    return panel;
+  }
+
+  function showPanel(id) {
+    for (var i = 0; i < container.children.length; i++) {
+      container.children[i].style.display = i === id ? 'block' : 'none';
+    }
+
+    mode = id;
+  } //
+
+
+  var beginTime = (performance || Date).now(),
+      prevTime = beginTime,
+      frames = 0;
+  var fpsPanel = addPanel(new Stats.Panel('FPS', '#0ff', '#002'));
+  var msPanel = addPanel(new Stats.Panel('MS', '#0f0', '#020'));
+
+  if (self.performance && self.performance.memory) {
+    var memPanel = addPanel(new Stats.Panel('MB', '#f08', '#201'));
+  }
+
+  showPanel(0);
+  return {
+    REVISION: 16,
+    dom: container,
+    addPanel: addPanel,
+    showPanel: showPanel,
+    begin: function () {
+      beginTime = (performance || Date).now();
+    },
+    end: function () {
+      frames++;
+      var time = (performance || Date).now();
+      msPanel.update(time - beginTime, 200);
+
+      if (time >= prevTime + 1000) {
+        fpsPanel.update(frames * 1000 / (time - prevTime), 100);
+        prevTime = time;
+        frames = 0;
+
+        if (memPanel) {
+          var memory = performance.memory;
+          memPanel.update(memory.usedJSHeapSize / 1048576, memory.jsHeapSizeLimit / 1048576);
+        }
+      }
+
+      return time;
+    },
+    update: function () {
+      beginTime = this.end();
+    },
+    // Backwards Compatibility
+    domElement: container,
+    setMode: showPanel
+  };
+};
+
+Stats.Panel = function (name, fg, bg) {
+  var min = Infinity,
+      max = 0,
+      round = Math.round;
+  var PR = round(window.devicePixelRatio || 1);
+  var WIDTH = 80 * PR,
+      HEIGHT = 48 * PR,
+      TEXT_X = 3 * PR,
+      TEXT_Y = 2 * PR,
+      GRAPH_X = 3 * PR,
+      GRAPH_Y = 15 * PR,
+      GRAPH_WIDTH = 74 * PR,
+      GRAPH_HEIGHT = 30 * PR;
+  var canvas = document.createElement('canvas');
+  canvas.width = WIDTH;
+  canvas.height = HEIGHT;
+  canvas.style.cssText = 'width:80px;height:48px';
+  var context = canvas.getContext('2d');
+  context.font = 'bold ' + 9 * PR + 'px Helvetica,Arial,sans-serif';
+  context.textBaseline = 'top';
+  context.fillStyle = bg;
+  context.fillRect(0, 0, WIDTH, HEIGHT);
+  context.fillStyle = fg;
+  context.fillText(name, TEXT_X, TEXT_Y);
+  context.fillRect(GRAPH_X, GRAPH_Y, GRAPH_WIDTH, GRAPH_HEIGHT);
+  context.fillStyle = bg;
+  context.globalAlpha = 0.9;
+  context.fillRect(GRAPH_X, GRAPH_Y, GRAPH_WIDTH, GRAPH_HEIGHT);
+  return {
+    dom: canvas,
+    update: function (value, maxValue) {
+      min = Math.min(min, value);
+      max = Math.max(max, value);
+      context.fillStyle = bg;
+      context.globalAlpha = 1;
+      context.fillRect(0, 0, WIDTH, GRAPH_Y);
+      context.fillStyle = fg;
+      context.fillText(round(value) + ' ' + name + ' (' + round(min) + '-' + round(max) + ')', TEXT_X, TEXT_Y);
+      context.drawImage(canvas, GRAPH_X + PR, GRAPH_Y, GRAPH_WIDTH - PR, GRAPH_HEIGHT, GRAPH_X, GRAPH_Y, GRAPH_WIDTH - PR, GRAPH_HEIGHT);
+      context.fillRect(GRAPH_X + GRAPH_WIDTH - PR, GRAPH_Y, PR, GRAPH_HEIGHT);
+      context.fillStyle = bg;
+      context.globalAlpha = 0.9;
+      context.fillRect(GRAPH_X + GRAPH_WIDTH - PR, GRAPH_Y, PR, round((1 - value / maxValue) * GRAPH_HEIGHT));
+    }
+  };
+};
+
+var _default = Stats;
+exports.default = _default;
+},{}],"js/index.js":[function(require,module,exports) {
 "use strict";
 
 var THREE = _interopRequireWildcard(require("three"));
@@ -41763,13 +41889,23 @@ var _datGui = require("three/examples/jsm/libs/dat.gui.module");
 
 var _GLTFLoader = require("three/examples/jsm/loaders/GLTFLoader");
 
+var _stats = _interopRequireDefault(require("three/examples/jsm/libs/stats.module"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 var camera, scene, renderer, selection, mesh, selected;
+var listofParts;
+var show;
 
 function init() {
+  show = true; //let stats = new Stats()
+  //document.body.appendChild( stats.domElement)
+
+  mesh = new THREE.Object3D();
   var container = document.createElement('div');
   document.body.appendChild(container);
   camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.25, 20);
@@ -41790,16 +41926,11 @@ function init() {
   //choose model
 
   var listOfModels = {
-    'model1': 'tester2.gltf',
-    'model2': 'tester3.gltf',
-    'model3': 'tester3.gltf',
-    'model4': 'tester4.gltf'
-  };
-  selection = {
-    modelo: ['tester2.gltf', 'tester3.gltf']
+    'model1': 'testModelA.gltf',
+    'model2': 'testModelB.gltf'
   };
   selected = {
-    model: 'tester2.gltf'
+    model: 'testModelA.gltf'
   };
 
   function modelosLoad() {
@@ -41814,23 +41945,15 @@ function init() {
   var settings = {
     modelos: {
       model: 'tester2.gltf'
-    }
+    },
+    visible: true
   }; //data gui 
 
   var gui = new _datGui.GUI();
-  var modelos = gui.addFolder('3d Models'); //modelos.add(settings, 'modelos',['modelo 1','modelo 2']).onChange(modelosLoad);
-
-  modelos.add(selected, 'model', listOfModels).onChange(loadModels); //tester element
-
-  var geometry = new THREE.BoxGeometry();
-  var material = new THREE.MeshBasicMaterial({
-    color: 0x00ff00,
-    shading: THREE.FlatShading
-  });
-  var cube = new THREE.Mesh(geometry, material);
-  cube.castShadow = true; //scene.add( cube );
-  //end tester element
-
+  var modelos = gui.addFolder('3d Models');
+  modelos.add(selected, 'model', listOfModels).onChange(loadModels);
+  var elements = gui.addFolder(" Partes ");
+  elements.add(settings, 'visible').onChange(showandhide);
   renderer = new THREE.WebGLRenderer({
     antialias: true
   });
@@ -41858,13 +41981,18 @@ function loadModels() {
   }
 
   ;
-  var loader = new _GLTFLoader.GLTFLoader().setPath('models/'); //loader.load(selection.modelo[1], ( gltf ) => {
-
+  var loader = new _GLTFLoader.GLTFLoader().setPath('models/');
   loader.load(selected.model, function (gltf) {
     gltf.scene.scale.set(0.4, 0.4, 0.4);
     mesh = gltf.scene;
-    var elements = gltf.scenes;
-    console.log(elements);
+    var parts = mesh.children; //console.log(parts.length)
+
+    for (var i = 0; i < parts.length; i++) {// console.log(parts[i].name)
+      //let cabeza = parts[i].getObjectByName("Cabeza_1")
+    } // listofParts =new Array(parts.length);
+    // console.log(listofParts.length);
+
+
     scene.add(mesh);
   }, function (xhr) {
     console.log(xhr.loaded / xhr.total * 100 + '% loaded');
@@ -41872,6 +42000,18 @@ function loadModels() {
   function (error) {
     console.log('No valio ' + error);
   });
+}
+
+function showandhide(show) {
+  console.log(show);
+
+  if (show === true) {
+    // cabeza.visible =true
+    mesh.getObjectByName("Cabeza_1").visible = true;
+  } else {
+    // cabeza.visible= false
+    mesh.getObjectByName("Cabeza_1").visible = false;
+  }
 }
 
 function onWindowResize() {
@@ -41893,7 +42033,7 @@ window.onload = function () {
   loadModels();
   render();
 };
-},{"three":"../node_modules/three/build/three.module.js","three/examples/jsm/controls/OrbitControls":"../node_modules/three/examples/jsm/controls/OrbitControls.js","three/examples/jsm/libs/dat.gui.module":"../node_modules/three/examples/jsm/libs/dat.gui.module.js","three/examples/jsm/loaders/GLTFLoader":"../node_modules/three/examples/jsm/loaders/GLTFLoader.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"three":"../node_modules/three/build/three.module.js","three/examples/jsm/controls/OrbitControls":"../node_modules/three/examples/jsm/controls/OrbitControls.js","three/examples/jsm/libs/dat.gui.module":"../node_modules/three/examples/jsm/libs/dat.gui.module.js","three/examples/jsm/loaders/GLTFLoader":"../node_modules/three/examples/jsm/loaders/GLTFLoader.js","three/examples/jsm/libs/stats.module":"../node_modules/three/examples/jsm/libs/stats.module.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -41921,7 +42061,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38623" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46337" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
