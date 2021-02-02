@@ -41898,10 +41898,13 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 var camera, scene, renderer, selection, mesh, selected;
+var listofParts;
+var show;
 
 function init() {
-  //let stats = new Stats()
+  show = true; //let stats = new Stats()
   //document.body.appendChild( stats.domElement)
+
   mesh = new THREE.Object3D();
   var container = document.createElement('div');
   document.body.appendChild(container);
@@ -41942,19 +41945,15 @@ function init() {
   var settings = {
     modelos: {
       model: 'tester2.gltf'
-    }
+    },
+    visible: true
   }; //data gui 
 
   var gui = new _datGui.GUI();
   var modelos = gui.addFolder('3d Models');
-  modelos.add(selected, 'model', listOfModels).onChange(loadModels); //tester element
-  // const geometry = new THREE.BoxGeometry();
-  // const material = new THREE.MeshBasicMaterial( { color: 0x00ff00,shading: THREE.FlatShading } );
-  // const cube = new THREE.Mesh( geometry, material );
-  // cube.castShadow = true;
-  //scene.add( cube );
-  //end tester element
-
+  modelos.add(selected, 'model', listOfModels).onChange(loadModels);
+  var elements = gui.addFolder(" Partes ");
+  elements.add(settings, 'visible').onChange(showandhide);
   renderer = new THREE.WebGLRenderer({
     antialias: true
   });
@@ -41986,8 +41985,14 @@ function loadModels() {
   loader.load(selected.model, function (gltf) {
     gltf.scene.scale.set(0.4, 0.4, 0.4);
     mesh = gltf.scene;
-    mesh.name = 'modelo';
-    console.log(mesh);
+    var parts = mesh.children; //console.log(parts.length)
+
+    for (var i = 0; i < parts.length; i++) {// console.log(parts[i].name)
+      //let cabeza = parts[i].getObjectByName("Cabeza_1")
+    } // listofParts =new Array(parts.length);
+    // console.log(listofParts.length);
+
+
     scene.add(mesh);
   }, function (xhr) {
     console.log(xhr.loaded / xhr.total * 100 + '% loaded');
@@ -41995,6 +42000,18 @@ function loadModels() {
   function (error) {
     console.log('No valio ' + error);
   });
+}
+
+function showandhide(show) {
+  console.log(show);
+
+  if (show === true) {
+    // cabeza.visible =true
+    mesh.getObjectByName("Cabeza_1").visible = true;
+  } else {
+    // cabeza.visible= false
+    mesh.getObjectByName("Cabeza_1").visible = false;
+  }
 }
 
 function onWindowResize() {
@@ -42044,7 +42061,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36685" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46337" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
