@@ -39,7 +39,7 @@ function init(){
     selection = {
         modelo: ['tester2.gltf','tester3.gltf']
     };
-    
+
 
     function modelosLoad(){
         console.log("cambio");
@@ -47,53 +47,19 @@ function init(){
             case 'tester2.gltf':
         }    
     }
-    
-    //load model
-
-    const loader = new GLTFLoader().setPath('models/');
-
-
-    loader.load(selection.modelo[1], ( gltf ) => {
-        gltf.scene.scale.set(0.4,0.4,0.4) 
-        mesh = gltf.scene
-        const elements = gltf.scenes
-    
-        console.log(elements)
-       
-        scene.add( mesh)
-    },function ( xhr ) {
-
-		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-
-	},
-	// called when loading has errors
-	function ( error ) {
-
-		console.log( 'No valio ' +error );
-
-    }); 
+ 
     
 // DATA GUI CONTENT
 const settings = {
-    velx:0,
-    vely:0,
-    modelos: "modelo 1",
-    camera: {
-        speed:0.001
-    },
-    a:{
-        md1: 'tester2.gltf',
-    }
+    modelos:{
+        hombre: 'tester2.gltf'
+    } 
 };
 //data gui 
     const gui = new GUI();
-    let cam = gui.addFolder('Camara Settings');
     let modelos = gui.addFolder('3d Models');
-    cam.add(settings.camera, 'speed',0,0.0010).listen();
-    modelos.add(settings, 'modelos',['modelo 1','modelo 2']).onChange(modelosLoad);
-    let elementos = gui.addFolder('Selecion modelos');
-    //elementos.add(settings.a,'md',['md1','md2'])
-    elementos.add(settings.a, 'md1',listOfModels)
+    //modelos.add(settings, 'modelos',['modelo 1','modelo 2']).onChange(modelosLoad);
+    modelos.add(settings.modelos, 'hombre',listOfModels)
 
 
 
@@ -173,5 +139,6 @@ window.onload = ()=> {
    console.clear();
     console.log("hello.... FRIEND threejs:"+THREE.REVISION);
     init();
+    loadModels();
     render();
 }

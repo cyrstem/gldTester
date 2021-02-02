@@ -41805,43 +41805,19 @@ function init() {
     switch (listOfModels) {
       case 'tester2.gltf':
     }
-  } //load model
+  } // DATA GUI CONTENT
 
-
-  var loader = new _GLTFLoader.GLTFLoader().setPath('models/');
-  loader.load(selection.modelo[1], function (gltf) {
-    gltf.scene.scale.set(0.4, 0.4, 0.4);
-    mesh = gltf.scene;
-    var elements = gltf.scenes;
-    console.log(elements);
-    scene.add(mesh);
-  }, function (xhr) {
-    console.log(xhr.loaded / xhr.total * 100 + '% loaded');
-  }, // called when loading has errors
-  function (error) {
-    console.log('No valio ' + error);
-  }); // DATA GUI CONTENT
 
   var settings = {
-    velx: 0,
-    vely: 0,
-    modelos: "modelo 1",
-    camera: {
-      speed: 0.001
-    },
-    a: {
-      md1: 'tester2.gltf'
+    modelos: {
+      hombre: 'tester2.gltf'
     }
   }; //data gui 
 
   var gui = new _datGui.GUI();
-  var cam = gui.addFolder('Camara Settings');
-  var modelos = gui.addFolder('3d Models');
-  cam.add(settings.camera, 'speed', 0, 0.0010).listen();
-  modelos.add(settings, 'modelos', ['modelo 1', 'modelo 2']).onChange(modelosLoad);
-  var elementos = gui.addFolder('Selecion modelos'); //elementos.add(settings.a,'md',['md1','md2'])
+  var modelos = gui.addFolder('3d Models'); //modelos.add(settings, 'modelos',['modelo 1','modelo 2']).onChange(modelosLoad);
 
-  elementos.add(settings.a, 'md1', listOfModels); //tester element
+  modelos.add(settings.modelos, 'hombre', listOfModels); //tester element
 
   var geometry = new THREE.BoxGeometry();
   var material = new THREE.MeshBasicMaterial({
@@ -41873,6 +41849,22 @@ function init() {
   window.addEventListener('resize', onWindowResize);
 }
 
+function loadModels() {
+  var loader = new _GLTFLoader.GLTFLoader().setPath('models/');
+  loader.load(selection.modelo[1], function (gltf) {
+    gltf.scene.scale.set(0.4, 0.4, 0.4);
+    mesh = gltf.scene;
+    var elements = gltf.scenes;
+    console.log(elements);
+    scene.add(mesh);
+  }, function (xhr) {
+    console.log(xhr.loaded / xhr.total * 100 + '% loaded');
+  }, // called when loading has errors
+  function (error) {
+    console.log('No valio ' + error);
+  });
+}
+
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
@@ -41889,6 +41881,7 @@ window.onload = function () {
   console.clear();
   console.log("hello.... FRIEND threejs:" + THREE.REVISION);
   init();
+  loadModels();
   render();
 };
 },{"three":"../node_modules/three/build/three.module.js","three/examples/jsm/controls/OrbitControls":"../node_modules/three/examples/jsm/controls/OrbitControls.js","three/examples/jsm/libs/dat.gui.module":"../node_modules/three/examples/jsm/libs/dat.gui.module.js","three/examples/jsm/loaders/GLTFLoader":"../node_modules/three/examples/jsm/loaders/GLTFLoader.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -41919,7 +41912,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33747" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39029" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
