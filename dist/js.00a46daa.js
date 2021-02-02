@@ -41767,7 +41767,7 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-var camera, scene, renderer, selection, mesh, select;
+var camera, scene, renderer, selection, mesh, selected;
 
 function init() {
   var container = document.createElement('div');
@@ -41798,6 +41798,9 @@ function init() {
   selection = {
     modelo: ['tester2.gltf', 'tester3.gltf']
   };
+  selected = {
+    model: 'tester2.gltf'
+  };
 
   function modelosLoad() {
     console.log("cambio");
@@ -41817,7 +41820,7 @@ function init() {
   var gui = new _datGui.GUI();
   var modelos = gui.addFolder('3d Models'); //modelos.add(settings, 'modelos',['modelo 1','modelo 2']).onChange(modelosLoad);
 
-  modelos.add(settings.modelos, 'model', listOfModels); //tester element
+  modelos.add(selected, 'model', listOfModels).onChange(loadModels); //tester element
 
   var geometry = new THREE.BoxGeometry();
   var material = new THREE.MeshBasicMaterial({
@@ -41850,8 +41853,14 @@ function init() {
 }
 
 function loadModels() {
-  var loader = new _GLTFLoader.GLTFLoader().setPath('models/');
-  loader.load(selection.modelo[1], function (gltf) {
+  if (mesh !== undefined) {
+    scene.remove(mesh);
+  }
+
+  ;
+  var loader = new _GLTFLoader.GLTFLoader().setPath('models/'); //loader.load(selection.modelo[1], ( gltf ) => {
+
+  loader.load(selected.model, function (gltf) {
     gltf.scene.scale.set(0.4, 0.4, 0.4);
     mesh = gltf.scene;
     var elements = gltf.scenes;
@@ -41912,7 +41921,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44425" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38623" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

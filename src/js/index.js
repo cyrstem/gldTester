@@ -4,7 +4,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-let camera, scene , renderer, selection, mesh, select;
+let camera, scene , renderer, selection, mesh, selected;
 
 function init(){
     const container = document.createElement('div');
@@ -40,6 +40,9 @@ function init(){
         modelo: ['tester2.gltf','tester3.gltf']
     };
 
+    selected = {
+        model: 'tester2.gltf'
+    }
 
     function modelosLoad(){
         console.log("cambio");
@@ -59,7 +62,7 @@ const settings = {
     const gui = new GUI();
     let modelos = gui.addFolder('3d Models');
     //modelos.add(settings, 'modelos',['modelo 1','modelo 2']).onChange(modelosLoad);
-    modelos.add(settings.modelos, 'model',listOfModels)
+    modelos.add(selected, 'model',listOfModels).onChange(loadModels)
 
 
 
@@ -93,8 +96,14 @@ const settings = {
 }
 
 function loadModels (){
+
+    if(mesh !== undefined){
+        scene.remove(mesh);
+    };
+
   const loader = new GLTFLoader().setPath('models/');
-    loader.load(selection.modelo[1], ( gltf ) => {
+    //loader.load(selection.modelo[1], ( gltf ) => {
+        loader.load(selected.model, (gltf ) =>{
         gltf.scene.scale.set(0.4,0.4,0.4) 
         mesh = gltf.scene
         const elements = gltf.scenes
