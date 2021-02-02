@@ -4,8 +4,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-let camera, scene , renderer, selection;
-
+let camera, scene , renderer, selection, modelos;
 
 function init(){
     const container = document.createElement('div');
@@ -16,7 +15,7 @@ function init(){
 
     //Lights
     let  shadowlight = new THREE.DirectionalLight( 0xffffff, 1.8 );
-	shadowlight.position.set( 0, 350, 0 );
+	shadowlight.position.set( 0, 300, 0 );
 	shadowlight.castShadow = true;
 	shadowlight.shadowDarkness = 0.1;
     scene.add(shadowlight);
@@ -30,21 +29,6 @@ function init(){
     //endLights
 
 
-
-    //ADD floor
-    // const ground = new THREE.PlaneGeometry( 500, 500, 1, 1 );
-	// const materials = new THREE.MeshBasicMaterial( { color: 0xF9F8ED } );
-    // let floor = new THREE.Mesh( ground, materials );
-    
-	// floor.material.side = THREE.DoubleSide;
-	// floor.position.y =-5;
-	// floor.position.z =-4;
-	// floor.rotation.x = 90*Math.PI/180;
-	// floor.rotation.y = 0;
-	// floor.rotation.z = 0;
-	// floor.doubleSided = true;
-    // floor.receiveShadow = true;
-	// scene.add(floor);
     //choose model
     let listOfModels ={
         'model1':'tester2.gltf',
@@ -56,20 +40,21 @@ function init(){
     
 
     function modelosLoad(){
-        console.log("cambio");
-        
+        console.log("cambio");         
     }
-  
+    
     //load model
 
     const loader = new GLTFLoader().setPath('models/');
 
 
-    loader.load(selection.modelo[0], ( gltf ) => {
+    loader.load(selection.modelo[1], ( gltf ) => {
         gltf.scene.scale.set(0.4,0.4,0.4) 
         const modelo = gltf.scene
-        const elements = modelo.children
+        const elements = gltf.scenes
+    
         console.log(elements)
+       
         scene.add( modelo )
     },function ( xhr ) {
 
@@ -123,7 +108,8 @@ const settings = {
 				controls.addEventListener( 'change', render ); // use if there is no animation loop
 				controls.minDistance = 2;
 				controls.maxDistance = 10;
-				controls.target.set( 0, 0, 0 );
+                controls.target.set( 0, 0, 0 );
+                controls.autoRotate = true;
 				controls.update();
 
 				window.addEventListener( 'resize', onWindowResize );
@@ -133,7 +119,6 @@ function onWindowResize() {
 
 				camera.aspect = window.innerWidth / window.innerHeight;
 				camera.updateProjectionMatrix();
-
 				renderer.setSize( window.innerWidth, window.innerHeight );
 
 				render();

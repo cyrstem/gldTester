@@ -41767,7 +41767,7 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-var camera, scene, renderer, selection;
+var camera, scene, renderer, selection, modelos;
 
 function init() {
   var container = document.createElement('div');
@@ -41777,7 +41777,7 @@ function init() {
   scene = new THREE.Scene(); //Lights
 
   var shadowlight = new THREE.DirectionalLight(0xffffff, 1.8);
-  shadowlight.position.set(0, 350, 0);
+  shadowlight.position.set(0, 300, 0);
   shadowlight.castShadow = true;
   shadowlight.shadowDarkness = 0.1;
   scene.add(shadowlight);
@@ -41787,19 +41787,6 @@ function init() {
   var backLight = new THREE.DirectionalLight(0xffffff, 1);
   backLight.position.set(-40, 100, 20);
   scene.add(backLight); //endLights
-  //ADD floor
-  // const ground = new THREE.PlaneGeometry( 500, 500, 1, 1 );
-  // const materials = new THREE.MeshBasicMaterial( { color: 0xF9F8ED } );
-  // let floor = new THREE.Mesh( ground, materials );
-  // floor.material.side = THREE.DoubleSide;
-  // floor.position.y =-5;
-  // floor.position.z =-4;
-  // floor.rotation.x = 90*Math.PI/180;
-  // floor.rotation.y = 0;
-  // floor.rotation.z = 0;
-  // floor.doubleSided = true;
-  // floor.receiveShadow = true;
-  // scene.add(floor);
   //choose model
 
   var listOfModels = {
@@ -41816,10 +41803,10 @@ function init() {
 
 
   var loader = new _GLTFLoader.GLTFLoader().setPath('models/');
-  loader.load(selection.modelo[0], function (gltf) {
+  loader.load(selection.modelo[1], function (gltf) {
     gltf.scene.scale.set(0.4, 0.4, 0.4);
     var modelo = gltf.scene;
-    var elements = modelo.children;
+    var elements = gltf.scenes;
     console.log(elements);
     scene.add(modelo);
   }, function (xhr) {
@@ -41869,6 +41856,7 @@ function init() {
   controls.minDistance = 2;
   controls.maxDistance = 10;
   controls.target.set(0, 0, 0);
+  controls.autoRotate = true;
   controls.update();
   window.addEventListener('resize', onWindowResize);
 }
@@ -41919,7 +41907,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35875" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34705" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
