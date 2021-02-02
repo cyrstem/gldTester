@@ -125,6 +125,32 @@ const settings = {
 				window.addEventListener( 'resize', onWindowResize );
 
 }
+
+function loadModels (){
+  const loader = new GLTFLoader().setPath('models/');
+    loader.load(selection.modelo[1], ( gltf ) => {
+        gltf.scene.scale.set(0.4,0.4,0.4) 
+        mesh = gltf.scene
+        const elements = gltf.scenes
+    
+        console.log(elements)
+       
+        scene.add( mesh)
+    },function ( xhr ) {
+
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'No valio ' +error );
+
+    }); 
+}
+
+
+
 function onWindowResize() {
 
 				camera.aspect = window.innerWidth / window.innerHeight;
