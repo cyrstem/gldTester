@@ -41900,6 +41900,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var camera, scene, renderer, selection, mesh, selected;
 var listofParts;
 var show;
+var partsResults;
 
 function init() {
   show = true; //let stats = new Stats()
@@ -41931,16 +41932,13 @@ function init() {
   };
   selected = {
     model: 'testModelA.gltf'
-  };
-
-  function modelosLoad() {
-    console.log("cambio");
-
-    switch (listOfModels) {
-      case 'tester2.gltf':
-    }
-  } // DATA GUI CONTENT
-
+  }; // function modelosLoad(){
+  //     console.log("cambio");
+  //     switch(listOfModels){
+  //         case 'tester2.gltf':
+  //     }    
+  // }
+  // DATA GUI CONTENT
 
   var settings = {
     modelos: {
@@ -41954,6 +41952,8 @@ function init() {
   modelos.add(selected, 'model', listOfModels).onChange(loadModels);
   var elements = gui.addFolder(" Partes ");
   elements.add(settings, 'visible').onChange(showandhide);
+  var pruebaElementos = gui.addFolder("prueba partes");
+  pruebaElementos.add(selected, 'model', partsResults);
   renderer = new THREE.WebGLRenderer({
     antialias: true
   });
@@ -41985,13 +41985,15 @@ function loadModels() {
   loader.load(selected.model, function (gltf) {
     gltf.scene.scale.set(0.4, 0.4, 0.4);
     mesh = gltf.scene;
-    var parts = mesh.children; //console.log(parts.length)
-
-    for (var i = 0; i < parts.length; i++) {// console.log(parts[i].name)
-      //let cabeza = parts[i].getObjectByName("Cabeza_1")
-    } // listofParts =new Array(parts.length);
+    var parts = mesh.children;
+    partsResults = Object.assign({}, parts);
+    separateElements(partsResults); //console.log(partsResults);
+    //for(let i = 0; i<parts.length; i++){
+    // console.log(parts[i].name)
+    //let cabeza = parts[i].getObjectByName("Cabeza_1")
+    //}
+    // listofParts =new Array(parts.length);
     // console.log(listofParts.length);
-
 
     scene.add(mesh);
   }, function (xhr) {
@@ -42012,6 +42014,14 @@ function showandhide(show) {
     // cabeza.visible= false
     mesh.getObjectByName("Cabeza_1").visible = false;
   }
+} ///para separar
+
+
+function separateElements(e) {
+  var resultado = e;
+  console.log(resultado); // for(let i = 0; i<e.length; i++){
+  //        console.log(e)
+  // }
 }
 
 function onWindowResize() {
@@ -42030,7 +42040,8 @@ window.onload = function () {
   console.clear();
   console.log("hello.... FRIEND threejs:" + THREE.REVISION);
   init();
-  loadModels();
+  loadModels(); ///for tests
+
   render();
 };
 },{"three":"../node_modules/three/build/three.module.js","three/examples/jsm/controls/OrbitControls":"../node_modules/three/examples/jsm/controls/OrbitControls.js","three/examples/jsm/libs/dat.gui.module":"../node_modules/three/examples/jsm/libs/dat.gui.module.js","three/examples/jsm/loaders/GLTFLoader":"../node_modules/three/examples/jsm/loaders/GLTFLoader.js","three/examples/jsm/libs/stats.module":"../node_modules/three/examples/jsm/libs/stats.module.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -42061,7 +42072,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46337" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42811" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

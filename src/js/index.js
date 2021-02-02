@@ -8,6 +8,7 @@ import  Stats  from 'three/examples/jsm/libs/stats.module'
 let camera, scene , renderer, selection, mesh, selected;
 let listofParts;
 let show;
+let partsResults;
 
 function init(){
     show = true;
@@ -46,12 +47,12 @@ function init(){
         model: 'testModelA.gltf'
     }
 
-    function modelosLoad(){
-        console.log("cambio");
-        switch(listOfModels){
-            case 'tester2.gltf':
-        }    
-    }
+    // function modelosLoad(){
+    //     console.log("cambio");
+    //     switch(listOfModels){
+    //         case 'tester2.gltf':
+    //     }    
+    // }
   
     
 // DATA GUI CONTENT
@@ -65,8 +66,12 @@ const settings = {
     const gui = new GUI();
     let modelos = gui.addFolder('3d Models');
     modelos.add(selected, 'model',listOfModels).onChange(loadModels)
+
     let elements = gui.addFolder(" Partes ");
     elements.add(settings, 'visible').onChange(showandhide)
+
+    let pruebaElementos = gui.addFolder( "prueba partes");
+    pruebaElementos.add(selected, 'model', partsResults)
 
 
     renderer = new THREE.WebGLRenderer( { antialias: true } );
@@ -101,15 +106,17 @@ function loadModels (){
         gltf.scene.scale.set(0.4,0.4,0.4) 
         mesh = gltf.scene
         const parts = mesh.children
-        //console.log(parts.length)
+        partsResults = Object.assign({},parts);
+        separateElements(partsResults);
+        //console.log(partsResults);
 
        
 
-        for(let i = 0; i<parts.length; i++){
+        //for(let i = 0; i<parts.length; i++){
            // console.log(parts[i].name)
             //let cabeza = parts[i].getObjectByName("Cabeza_1")
            
-        }
+        //}
         // listofParts =new Array(parts.length);
         // console.log(listofParts.length);
 
@@ -137,7 +144,15 @@ if(show === true){
     mesh.getObjectByName("Cabeza_1").visible = false
  }
 }
-
+///para separar
+function separateElements(e){
+   
+    let resultado = e
+    console.log(resultado)
+    // for(let i = 0; i<e.length; i++){
+    //        console.log(e)
+    // }
+}
 function onWindowResize() {
 
 				camera.aspect = window.innerWidth / window.innerHeight;
@@ -161,6 +176,8 @@ window.onload = ()=> {
     console.log("hello.... FRIEND threejs:"+THREE.REVISION);
     init();
     loadModels();
+///for tests
+
     render();
 
 }
