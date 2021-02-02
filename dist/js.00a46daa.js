@@ -41791,12 +41791,7 @@ function init() {
 
   var listOfModels = {
     'model1': 'tester2.gltf',
-    'model2': 'tester3.gltf',
-    'model3': 'tester3.gltf',
-    'model4': 'tester4.gltf'
-  };
-  selection = {
-    modelo: ['tester2.gltf', 'tester3.gltf']
+    'model2': 'tester3.gltf'
   };
   selected = {
     model: 'tester2.gltf'
@@ -41818,17 +41813,13 @@ function init() {
   }; //data gui 
 
   var gui = new _datGui.GUI();
-  var modelos = gui.addFolder('3d Models'); //modelos.add(settings, 'modelos',['modelo 1','modelo 2']).onChange(modelosLoad);
-
+  var modelos = gui.addFolder('3d Models');
   modelos.add(selected, 'model', listOfModels).onChange(loadModels); //tester element
-
-  var geometry = new THREE.BoxGeometry();
-  var material = new THREE.MeshBasicMaterial({
-    color: 0x00ff00,
-    shading: THREE.FlatShading
-  });
-  var cube = new THREE.Mesh(geometry, material);
-  cube.castShadow = true; //scene.add( cube );
+  // const geometry = new THREE.BoxGeometry();
+  // const material = new THREE.MeshBasicMaterial( { color: 0x00ff00,shading: THREE.FlatShading } );
+  // const cube = new THREE.Mesh( geometry, material );
+  // cube.castShadow = true;
+  //scene.add( cube );
   //end tester element
 
   renderer = new THREE.WebGLRenderer({
@@ -41921,7 +41912,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41945" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37143" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
