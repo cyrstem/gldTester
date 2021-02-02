@@ -4,7 +4,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-let camera, scene , renderer, selection, modelos;
+let camera, scene , renderer, selection, mesh, select;
 
 function init(){
     const container = document.createElement('div');
@@ -32,7 +32,9 @@ function init(){
     //choose model
     let listOfModels ={
         'model1':'tester2.gltf',
-        'model2':'tester3.gltf'
+        'model2':'tester3.gltf',
+        'model3':'tester3.gltf',
+        'model4':'tester4.gltf'
     };
     selection = {
         modelo: ['tester2.gltf','tester3.gltf']
@@ -40,7 +42,10 @@ function init(){
     
 
     function modelosLoad(){
-        console.log("cambio");         
+        console.log("cambio");
+        switch(listOfModels){
+            case 'tester2.gltf':
+        }    
     }
     
     //load model
@@ -50,12 +55,12 @@ function init(){
 
     loader.load(selection.modelo[1], ( gltf ) => {
         gltf.scene.scale.set(0.4,0.4,0.4) 
-        const modelo = gltf.scene
+        mesh = gltf.scene
         const elements = gltf.scenes
     
         console.log(elements)
        
-        scene.add( modelo )
+        scene.add( mesh)
     },function ( xhr ) {
 
 		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
@@ -75,6 +80,9 @@ const settings = {
     modelos: "modelo 1",
     camera: {
         speed:0.001
+    },
+    a:{
+        md1: 'tester2.gltf',
     }
 };
 //data gui 
@@ -83,7 +91,9 @@ const settings = {
     let modelos = gui.addFolder('3d Models');
     cam.add(settings.camera, 'speed',0,0.0010).listen();
     modelos.add(settings, 'modelos',['modelo 1','modelo 2']).onChange(modelosLoad);
-
+    let elementos = gui.addFolder('Selecion modelos');
+    //elementos.add(settings.a,'md',['md1','md2'])
+    elementos.add(settings.a, 'md1',listOfModels)
 
 
 

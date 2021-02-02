@@ -41767,7 +41767,7 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-var camera, scene, renderer, selection, modelos;
+var camera, scene, renderer, selection, mesh, select;
 
 function init() {
   var container = document.createElement('div');
@@ -41791,7 +41791,9 @@ function init() {
 
   var listOfModels = {
     'model1': 'tester2.gltf',
-    'model2': 'tester3.gltf'
+    'model2': 'tester3.gltf',
+    'model3': 'tester3.gltf',
+    'model4': 'tester4.gltf'
   };
   selection = {
     modelo: ['tester2.gltf', 'tester3.gltf']
@@ -41799,16 +41801,20 @@ function init() {
 
   function modelosLoad() {
     console.log("cambio");
+
+    switch (listOfModels) {
+      case 'tester2.gltf':
+    }
   } //load model
 
 
   var loader = new _GLTFLoader.GLTFLoader().setPath('models/');
   loader.load(selection.modelo[1], function (gltf) {
     gltf.scene.scale.set(0.4, 0.4, 0.4);
-    var modelo = gltf.scene;
+    mesh = gltf.scene;
     var elements = gltf.scenes;
     console.log(elements);
-    scene.add(modelo);
+    scene.add(mesh);
   }, function (xhr) {
     console.log(xhr.loaded / xhr.total * 100 + '% loaded');
   }, // called when loading has errors
@@ -41822,6 +41828,9 @@ function init() {
     modelos: "modelo 1",
     camera: {
       speed: 0.001
+    },
+    a: {
+      md1: 'tester2.gltf'
     }
   }; //data gui 
 
@@ -41829,7 +41838,10 @@ function init() {
   var cam = gui.addFolder('Camara Settings');
   var modelos = gui.addFolder('3d Models');
   cam.add(settings.camera, 'speed', 0, 0.0010).listen();
-  modelos.add(settings, 'modelos', ['modelo 1', 'modelo 2']).onChange(modelosLoad); //tester element
+  modelos.add(settings, 'modelos', ['modelo 1', 'modelo 2']).onChange(modelosLoad);
+  var elementos = gui.addFolder('Selecion modelos'); //elementos.add(settings.a,'md',['md1','md2'])
+
+  elementos.add(settings.a, 'md1', listOfModels); //tester element
 
   var geometry = new THREE.BoxGeometry();
   var material = new THREE.MeshBasicMaterial({
@@ -41907,7 +41919,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37757" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33747" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
