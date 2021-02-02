@@ -3,12 +3,16 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GUI } from 'three/examples/jsm/libs/dat.gui.module';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { Stats } from 'three/examples/jsm/libs/stats.module'
+import  Stats  from 'three/examples/jsm/libs/stats.module'
 
 let camera, scene , renderer, selection, mesh, selected;
 
 function init(){
-    const stats = new Stats();
+
+    //let stats = new Stats()
+    //document.body.appendChild( stats.domElement)
+
+    
     const container = document.createElement('div');
     document.body.appendChild( container );
     camera = new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight, 0.25,20)
