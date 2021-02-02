@@ -11,8 +11,8 @@ function init(){
 
     //let stats = new Stats()
     //document.body.appendChild( stats.domElement)
+    mesh = new THREE.Object3D();
 
-    
     const container = document.createElement('div');
     document.body.appendChild( container );
     camera = new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight, 0.25,20)
@@ -37,11 +37,11 @@ function init(){
 
     //choose model
     let listOfModels ={
-        'model1':'tester2.gltf',
-        'model2':'tester3.gltf'
+        'model1':'testModelA.gltf',
+        'model2':'testModelB.gltf'
     };
     selected = {
-        model: 'tester2.gltf'
+        model: 'testModelA.gltf'
     }
 
     function modelosLoad(){
@@ -101,15 +101,14 @@ function loadModels (){
     };
 
   const loader = new GLTFLoader().setPath('models/');
-    //loader.load(selection.modelo[1], ( gltf ) => {
         loader.load(selected.model, (gltf ) =>{
         gltf.scene.scale.set(0.4,0.4,0.4) 
         mesh = gltf.scene
-        const elements = gltf.scenes
-    
-        console.log(elements)
+        mesh.name = 'modelo'
        
+        console.log(mesh)
         scene.add( mesh)
+
     },function ( xhr ) {
 
 		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );

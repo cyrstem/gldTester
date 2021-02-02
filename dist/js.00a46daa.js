@@ -41900,9 +41900,9 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var camera, scene, renderer, selection, mesh, selected;
 
 function init() {
-  //let Stats =  Stats();
-  var stats = new _stats.default();
-  document.body.appendChild(stats.domElement);
+  //let stats = new Stats()
+  //document.body.appendChild( stats.domElement)
+  mesh = new THREE.Object3D();
   var container = document.createElement('div');
   document.body.appendChild(container);
   camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.25, 20);
@@ -41923,11 +41923,11 @@ function init() {
   //choose model
 
   var listOfModels = {
-    'model1': 'tester2.gltf',
-    'model2': 'tester3.gltf'
+    'model1': 'testModelA.gltf',
+    'model2': 'testModelB.gltf'
   };
   selected = {
-    model: 'tester2.gltf'
+    model: 'testModelA.gltf'
   };
 
   function modelosLoad() {
@@ -41982,13 +41982,12 @@ function loadModels() {
   }
 
   ;
-  var loader = new _GLTFLoader.GLTFLoader().setPath('models/'); //loader.load(selection.modelo[1], ( gltf ) => {
-
+  var loader = new _GLTFLoader.GLTFLoader().setPath('models/');
   loader.load(selected.model, function (gltf) {
     gltf.scene.scale.set(0.4, 0.4, 0.4);
     mesh = gltf.scene;
-    var elements = gltf.scenes;
-    console.log(elements);
+    mesh.name = 'modelo';
+    console.log(mesh);
     scene.add(mesh);
   }, function (xhr) {
     console.log(xhr.loaded / xhr.total * 100 + '% loaded');
@@ -42045,7 +42044,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43223" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36685" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
