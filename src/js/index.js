@@ -52,14 +52,14 @@ function init(){
 // DATA GUI CONTENT
 const settings = {
     modelos:{
-        hombre: 'tester2.gltf'
+        model: 'tester2.gltf'
     } 
 };
 //data gui 
     const gui = new GUI();
     let modelos = gui.addFolder('3d Models');
     //modelos.add(settings, 'modelos',['modelo 1','modelo 2']).onChange(modelosLoad);
-    modelos.add(settings.modelos, 'hombre',listOfModels)
+    modelos.add(settings.modelos, 'model',listOfModels)
 
 
 
