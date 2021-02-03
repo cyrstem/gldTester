@@ -41901,6 +41901,7 @@ var camera, scene, renderer, selection, mesh, selected;
 var listofParts;
 var show;
 var partsResults;
+var a, b, c;
 
 function init() {
   show = true; //let stats = new Stats()
@@ -41928,7 +41929,8 @@ function init() {
 
   var listOfModels = {
     'model1': 'testModelA.gltf',
-    'model2': 'testModelB.gltf'
+    'model2': 'testModelB.gltf',
+    'model3': 'modelComplete.gltf'
   };
   selected = {
     model: 'testModelA.gltf'
@@ -41944,16 +41946,69 @@ function init() {
     modelos: {
       model: 'tester2.gltf'
     },
-    visible: true
+    elementosA: {
+      head_visible: true,
+      pelo_visible: true,
+      nariz_visible: true
+    },
+    elementsB: {
+      head_visible2: true,
+      pelo_visible2: true,
+      nariz_visible2: true
+    }
   }; //data gui 
 
   var gui = new _datGui.GUI();
-  var modelos = gui.addFolder('3d Models');
+  var modelos = gui.addFolder(' Models tester');
   modelos.add(selected, 'model', listOfModels).onChange(loadModels);
-  var elements = gui.addFolder(" Partes ");
-  elements.add(settings, 'visible').onChange(showandhide);
-  var pruebaElementos = gui.addFolder("prueba partes");
-  pruebaElementos.add(selected, 'model', partsResults);
+  var elements = gui.addFolder("Partes A");
+  elements.add(settings.elementosA, 'head_visible').onChange(function (show) {
+    if (show === true) {
+      // cabeza.visible =true
+      mesh.getObjectByName("Cabeza_1").visible = true;
+    } else {
+      // cabeza.visible= false
+      mesh.getObjectByName("Cabeza_1").visible = false;
+    }
+  });
+  elements.add(settings.elementosA, 'nariz_visible').onChange(function (show) {
+    if (show === true) {
+      // cabeza.visible =true
+      mesh.getObjectByName("Nariz_1").visible = true; // mesh.getObjectByName("Pelo_1").visible = true
+    } else {
+      // cabeza.visible= false
+      mesh.getObjectByName("Nariz_1").visible = false; // mesh.getObjectByName("Pelo_1").visible = false
+    }
+  });
+  elements.add(settings.elementosA, 'pelo_visible').onChange(function (show) {
+    if (show === true) {
+      mesh.getObjectByName("Pelo_1").visible = true;
+    } else {
+      mesh.getObjectByName("Pelo_1").visible = false;
+    }
+  });
+  var elementsB = gui.addFolder("Partes B");
+  elementsB.add(settings.elementsB, 'head_visible2').onChange(function (show) {
+    if (show === true) {
+      mesh.getObjectByName("cabeza_2").visible = true;
+    } else {
+      mesh.getObjectByName("cabeza_2").visible = false;
+    }
+  });
+  elementsB.add(settings.elementsB, 'pelo_visible2').onChange(function (show) {
+    if (show === true) {
+      mesh.getObjectByName("pelo_2").visible = true;
+    } else {
+      mesh.getObjectByName("pelo_2").visible = false;
+    }
+  });
+  elementsB.add(settings.elementsB, 'nariz_visible2').onChange(function (show) {
+    if (show === true) {
+      mesh.getObjectByName("nariz_2").visible = true;
+    } else {
+      mesh.getObjectByName("nariz_2").visible = false;
+    }
+  });
   renderer = new THREE.WebGLRenderer({
     antialias: true
   });
@@ -42009,10 +42064,22 @@ function showandhide(show) {
 
   if (show === true) {
     // cabeza.visible =true
-    mesh.getObjectByName("Cabeza_1").visible = true;
+    mesh.getObjectByName("Cabeza_1").visible = true; // mesh.getObjectByName("Nariz_1").visible = true
+    // mesh.getObjectByName("Pelo_1").visible = true
   } else {
     // cabeza.visible= false
-    mesh.getObjectByName("Cabeza_1").visible = false;
+    mesh.getObjectByName("Cabeza_1").visible = false; // mesh.getObjectByName("Nariz_1").visible = false
+    // mesh.getObjectByName("Pelo_1").visible = false
+  }
+}
+
+function showandhide2(show) {
+  if (show === true) {
+    // cabeza.visible =true
+    mesh.getObjectByName("Cabeza_2").visible = true;
+  } else {
+    // cabeza.visible= false
+    mesh.getObjectByName("Cabeza_2").visible = false;
   }
 } ///para separar
 
@@ -42072,7 +42139,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42811" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34223" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
