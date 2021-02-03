@@ -8,6 +8,8 @@ import  Stats  from 'three/examples/jsm/libs/stats.module'
 let camera, scene , renderer, selection, mesh, selected;
 let listofParts;
 let show;
+let partsResults;
+let a,b,c;
 
 function init(){
     show = true;
@@ -40,18 +42,19 @@ function init(){
     //choose model
     let listOfModels ={
         'model1':'testModelA.gltf',
-        'model2':'testModelB.gltf'
+        'model2':'testModelB.gltf',
+        'model3':'modelComplete.gltf'
     };
     selected = {
         model: 'testModelA.gltf'
     }
 
-    function modelosLoad(){
-        console.log("cambio");
-        switch(listOfModels){
-            case 'tester2.gltf':
-        }    
-    }
+    // function modelosLoad(){
+    //     console.log("cambio");
+    //     switch(listOfModels){
+    //         case 'tester2.gltf':
+    //     }    
+    // }
   
     
 // DATA GUI CONTENT
@@ -59,14 +62,88 @@ const settings = {
     modelos:{
         model: 'tester2.gltf'
     },
-    visible: true
+    elementosA:{
+        head_visible: true,
+        pelo_visible: true,
+        nariz_visible: true
+    },
+    elementsB:{
+        head_visible2: true,
+        pelo_visible2: true,
+        nariz_visible2: true
+    }
+   
 };
 //data gui 
     const gui = new GUI();
-    let modelos = gui.addFolder('3d Models');
+    let modelos = gui.addFolder(' Models tester');
     modelos.add(selected, 'model',listOfModels).onChange(loadModels)
-    let elements = gui.addFolder(" Partes ");
-    elements.add(settings, 'visible').onChange(showandhide)
+
+    let elements = gui.addFolder("Partes A");
+    elements.add(settings.elementosA, 'head_visible').onChange(function(show){
+        if(show === true){
+            // cabeza.visible =true
+            mesh.getObjectByName("Cabeza_1").visible = true;
+
+         }else{
+            // cabeza.visible= false
+            mesh.getObjectByName("Cabeza_1").visible = false
+         }
+    })
+    elements.add(settings.elementosA, 'nariz_visible').onChange(function(show){
+        if(show === true){
+            // cabeza.visible =true
+             mesh.getObjectByName("Nariz_1").visible = true
+            // mesh.getObjectByName("Pelo_1").visible = true
+         }else{
+            // cabeza.visible= false
+    
+             mesh.getObjectByName("Nariz_1").visible = false
+            // mesh.getObjectByName("Pelo_1").visible = false
+         }
+    })
+    elements.add(settings.elementosA, 'pelo_visible').onChange(function(show){
+        if(show === true){
+      
+             mesh.getObjectByName("Pelo_1").visible = true
+         }else{
+         
+            mesh.getObjectByName("Pelo_1").visible = false
+         }
+    })
+
+
+    let elementsB = gui.addFolder("Partes B");
+    elementsB.add(settings.elementsB, 'head_visible2').onChange(function(show){
+    
+        if(show === true){
+      
+            mesh.getObjectByName("cabeza_2").visible = true
+        }else{
+        
+           mesh.getObjectByName("cabeza_2").visible = false
+        }
+    })
+    elementsB.add(settings.elementsB, 'pelo_visible2').onChange(function(show){
+      
+        if(show === true){
+      
+            mesh.getObjectByName("pelo_2").visible = true
+        }else{
+        
+           mesh.getObjectByName("pelo_2").visible = false
+        }
+    })
+    elementsB.add(settings.elementsB, 'nariz_visible2').onChange(function(show){
+      
+        if(show === true){
+      
+            mesh.getObjectByName("nariz_2").visible = true
+        }else{
+        
+           mesh.getObjectByName("nariz_2").visible = false
+        }
+    })
 
 
     renderer = new THREE.WebGLRenderer( { antialias: true } );
@@ -101,15 +178,17 @@ function loadModels (){
         gltf.scene.scale.set(0.4,0.4,0.4) 
         mesh = gltf.scene
         const parts = mesh.children
-        //console.log(parts.length)
+        partsResults = Object.assign({},parts);
+        separateElements(partsResults);
+        //console.log(partsResults);
 
        
 
-        for(let i = 0; i<parts.length; i++){
+        //for(let i = 0; i<parts.length; i++){
            // console.log(parts[i].name)
             //let cabeza = parts[i].getObjectByName("Cabeza_1")
            
-        }
+        //}
         // listofParts =new Array(parts.length);
         // console.log(listofParts.length);
 
@@ -127,16 +206,48 @@ function loadModels (){
 
     }); 
 }
+
+
+
 function showandhide(show){
+
 console.log(show);
+
+
 if(show === true){
     // cabeza.visible =true
-    mesh.getObjectByName("Cabeza_1").visible = true
+    mesh.getObjectByName("Cabeza_1").visible = true;
+    // mesh.getObjectByName("Nariz_1").visible = true
+    // mesh.getObjectByName("Pelo_1").visible = true
  }else{
     // cabeza.visible= false
     mesh.getObjectByName("Cabeza_1").visible = false
+    // mesh.getObjectByName("Nariz_1").visible = false
+    // mesh.getObjectByName("Pelo_1").visible = false
  }
 }
+
+function showandhide2(show){
+    if(show === true){
+        // cabeza.visible =true
+        mesh.getObjectByName("Cabeza_2").visible = true
+     }else{
+        // cabeza.visible= false
+        mesh.getObjectByName("Cabeza_2").visible = false
+     }
+}
+
+///para separar
+function separateElements(e){
+   
+    let resultado = e
+    console.log(resultado)
+    // for(let i = 0; i<e.length; i++){
+    //        console.log(e)
+    // }
+}
+
+
 
 function onWindowResize() {
 
@@ -161,6 +272,8 @@ window.onload = ()=> {
     console.log("hello.... FRIEND threejs:"+THREE.REVISION);
     init();
     loadModels();
+///for tests
+
     render();
 
 }
