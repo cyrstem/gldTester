@@ -46,7 +46,7 @@ function init(){
         'model3':'modelComplete.gltf'
     };
     selected = {
-        model: 'testModelA.gltf'
+        model: 'modelComplete.gltf'
     }
 
     // function modelosLoad(){
