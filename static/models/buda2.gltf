@@ -1,0 +1,200 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v1.3.48",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                3
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "Mesh_0.004",
+            "translation" : [
+                17.62153434753418,
+                -5.208560466766357,
+                -2.5266499519348145
+            ]
+        },
+        {
+            "children" : [
+                0
+            ],
+            "name" : "Walking_Buddha_50KMeshOBJ.obj.cleaner.materialmerger.gles"
+        },
+        {
+            "children" : [
+                1
+            ],
+            "name" : "RootNode (model correction matrix)",
+            "rotation" : [
+                0.021329855546355247,
+                -0.0012530788080766797,
+                0.07765210419893265,
+                0.996751606464386
+            ],
+            "translation" : [
+                -19.26618194580078,
+                -0.5067923665046692,
+                -7.388665676116943
+            ]
+        },
+        {
+            "children" : [
+                2
+            ],
+            "name" : "RootNode (gltf orientation matrix)",
+            "rotation" : [
+                -0.7071068286895752,
+                0,
+                0,
+                0.7071068286895752
+            ]
+        }
+    ],
+    "materials" : [
+        {
+            "doubleSided" : true,
+            "emissiveFactor" : [
+                0,
+                0,
+                0
+            ],
+            "name" : "170407_000395_400_1MmeshOBJ",
+            "normalTexture" : {
+                "index" : 0,
+                "texCoord" : 0
+            },
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    0.8736661672592163,
+                    0.8736661672592163,
+                    0.8736661672592163,
+                    1
+                ],
+                "baseColorTexture" : {
+                    "index" : 1,
+                    "texCoord" : 0
+                },
+                "metallicRoughnessTexture" : {
+                    "index" : 2,
+                    "texCoord" : 0
+                }
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Mesh_0.004",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TEXCOORD_0" : 2
+                    },
+                    "indices" : 3,
+                    "material" : 0
+                }
+            ]
+        }
+    ],
+    "textures" : [
+        {
+            "source" : 0
+        },
+        {
+            "source" : 1
+        },
+        {
+            "source" : 2
+        }
+    ],
+    "images" : [
+        {
+            "mimeType" : "image/png",
+            "name" : "170407_000395_400_1MmeshOBJ_normal",
+            "uri" : "170407_000395_400_1MmeshOBJ_normal.png"
+        },
+        {
+            "mimeType" : "image/jpeg",
+            "name" : "170407_000395_400_1MmeshOBJ_baseColor",
+            "uri" : "170407_000395_400_1MmeshOBJ_baseColor.jpg"
+        },
+        {
+            "mimeType" : "image/png",
+            "name" : "170407_000395_400_1MmeshOBJ_metallicRoughness",
+            "uri" : "170407_000395_400_1MmeshOBJ_metallicRoughness.png"
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 33862,
+            "max" : [
+                2.8447930812835693,
+                3.4455270767211914,
+                19.708707809448242
+            ],
+            "min" : [
+                -2.2675669193267822,
+                -2.953248977661133,
+                -0.05479099974036217
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 33862,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 33862,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5123,
+            "count" : 159516,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 406344,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 406344,
+            "byteOffset" : 406344
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 270896,
+            "byteOffset" : 812688
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 319032,
+            "byteOffset" : 1083584
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 1402616,
+            "uri" : "buda2.bin"
+        }
+    ]
+}

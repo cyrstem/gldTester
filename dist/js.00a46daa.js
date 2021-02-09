@@ -41897,6 +41897,8 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var camera, scene, renderer, selection, mesh, selected;
 var listofParts;
 var show;
@@ -41927,20 +41929,19 @@ function init() {
   scene.add(backLight); //endLights
   //choose model
 
-  var listOfModels = {
+  var listOfModels = _defineProperty({
     'model1': 'testModelA.gltf',
     'model2': 'testModelB.gltf',
-    'model3': 'modelComplete.gltf'
-  };
+    'model3': 'modelComplete.gltf',
+    'model4': 'Cojitambo.gltf',
+    'model5': 'buda.gltf',
+    'model6': 'statu.gltf',
+    'model7': 'buda2.gltf'
+  }, "model7", 'mamut.gltf');
+
   selected = {
     model: 'modelComplete.gltf'
-  }; // function modelosLoad(){
-  //     console.log("cambio");
-  //     switch(listOfModels){
-  //         case 'tester2.gltf':
-  //     }    
-  // }
-  // DATA GUI CONTENT
+  }; // DATA GUI CONTENT
 
   var settings = {
     modelos: {
@@ -42031,7 +42032,7 @@ function init() {
 }
 
 function loadModels() {
-  if (mesh !== undefined) {
+  if (mesh !== 0) {
     scene.remove(mesh);
   }
 
@@ -42139,7 +42140,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41957" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38511" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

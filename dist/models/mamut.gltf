@@ -1,0 +1,119 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v1.3.48",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                1,
+                2
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "name" : "Walking_Buddha_50KMeshOBJ.obj.cleaner.materialmerger.gles"
+        },
+        {
+            "children" : [
+                0
+            ],
+            "name" : "RootNode (model correction matrix)",
+            "rotation" : [
+                0.021329855546355247,
+                -0.0012530788080766797,
+                0.07765210419893265,
+                0.996751606464386
+            ],
+            "translation" : [
+                -19.26618194580078,
+                -0.5067923665046692,
+                -7.388665676116943
+            ]
+        },
+        {
+            "mesh" : 0,
+            "name" : "Ma-Mammoth-1",
+            "scale" : [
+                0.6534190773963928,
+                0.6534190773963928,
+                0.6534190773963928
+            ],
+            "translation" : [
+                -21.132556915283203,
+                -21.887794494628906,
+                5.748859405517578
+            ]
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Ma-Mammoth-1",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1
+                    },
+                    "indices" : 2
+                }
+            ]
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 496983,
+            "max" : [
+                52.22787094116211,
+                65.91888427734375,
+                19.25130271911621
+            ],
+            "min" : [
+                -52.22787094116211,
+                -3.7000063457526267e-08,
+                -19.2504940032959
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 496983,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5125,
+            "count" : 497652,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 5963796,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 5963796,
+            "byteOffset" : 5963796
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 1990608,
+            "byteOffset" : 11927592
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 13918200,
+            "uri" : "mamut.bin"
+        }
+    ]
+}

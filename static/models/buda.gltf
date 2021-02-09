@@ -1,0 +1,199 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v1.3.48",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                3
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "Mesh_0.002",
+            "scale" : [
+                0.5137242078781128,
+                0.5137242078781128,
+                0.513724148273468
+            ],
+            "translation" : [
+                4.755261421203613,
+                0.2071116864681244,
+                3.109236001968384
+            ]
+        },
+        {
+            "children" : [
+                0
+            ],
+            "name" : "3rd_c_ce_GandharaBuddha_70K_Mesh_OBJ.obj.cleaner.materialmerger"
+        },
+        {
+            "children" : [
+                1
+            ],
+            "name" : "RootNode (model correction matrix)",
+            "rotation" : [
+                0.014928175136446953,
+                -0.021134458482265472,
+                -0.01185762882232666,
+                0.9995948672294617
+            ],
+            "translation" : [
+                -4.874053001403809,
+                1.5666533708572388,
+                -8.894698143005371
+            ]
+        },
+        {
+            "children" : [
+                2
+            ],
+            "name" : "RootNode (gltf orientation matrix)",
+            "rotation" : [
+                -0.7071068286895752,
+                0,
+                0,
+                0.7071068286895752
+            ]
+        }
+    ],
+    "materials" : [
+        {
+            "doubleSided" : true,
+            "emissiveFactor" : [
+                0,
+                0,
+                0
+            ],
+            "name" : "Mia_2001_153_NewGhandaraBuddha_OBJ",
+            "normalTexture" : {
+                "index" : 0,
+                "texCoord" : 0
+            },
+            "pbrMetallicRoughness" : {
+                "baseColorTexture" : {
+                    "index" : 1,
+                    "texCoord" : 0
+                },
+                "metallicRoughnessTexture" : {
+                    "index" : 2,
+                    "texCoord" : 0
+                }
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Mesh_0.002",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TEXCOORD_0" : 2
+                    },
+                    "indices" : 3,
+                    "material" : 0
+                }
+            ]
+        }
+    ],
+    "textures" : [
+        {
+            "source" : 0
+        },
+        {
+            "source" : 1
+        },
+        {
+            "source" : 2
+        }
+    ],
+    "images" : [
+        {
+            "mimeType" : "image/png",
+            "name" : "Mia_2001_153_NewGhandaraBuddha_OBJ_normal",
+            "uri" : "Mia_2001_153_NewGhandaraBuddha_OBJ_normal.png"
+        },
+        {
+            "mimeType" : "image/jpeg",
+            "name" : "Mia_2001_153_NewGhandaraBuddha_OBJ_baseColor",
+            "uri" : "Mia_2001_153_NewGhandaraBuddha_OBJ_baseColor.jpg"
+        },
+        {
+            "mimeType" : "image/png",
+            "name" : "Mia_2001_153_NewGhandaraBuddha_OBJ_metallicRoughness",
+            "uri" : "Mia_2001_153_NewGhandaraBuddha_OBJ_metallicRoughness.png"
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 42742,
+            "max" : [
+                5.108434200286865,
+                0.9203420281410217,
+                24.95874786376953
+            ],
+            "min" : [
+                -3.8811089992523193,
+                -4.057174205780029,
+                -0.9303879737854004
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 42742,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 42742,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5123,
+            "count" : 216192,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 512904,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 512904,
+            "byteOffset" : 512904
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 341936,
+            "byteOffset" : 1025808
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 432384,
+            "byteOffset" : 1367744
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 1800128,
+            "uri" : "buda.bin"
+        }
+    ]
+}

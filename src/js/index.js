@@ -43,20 +43,17 @@ function init(){
     let listOfModels ={
         'model1':'testModelA.gltf',
         'model2':'testModelB.gltf',
-        'model3':'modelComplete.gltf'
+        'model3':'modelComplete.gltf',
+        'model4':'Cojitambo.gltf',
+        'model5': 'buda.gltf',
+        'model6':'statu.gltf',
+        'model7':'buda2.gltf',
+        'model7':'mamut.gltf'
     };
     selected = {
         model: 'modelComplete.gltf'
     }
-
-    // function modelosLoad(){
-    //     console.log("cambio");
-    //     switch(listOfModels){
-    //         case 'tester2.gltf':
-    //     }    
-    // }
-  
-    
+      
 // DATA GUI CONTENT
 const settings = {
     modelos:{
@@ -169,7 +166,7 @@ const settings = {
 
 function loadModels (){
 
-    if(mesh !== undefined){
+    if(mesh !== 0){
         scene.remove(mesh);
     };
 
