@@ -1,0 +1,189 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v1.3.48",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                3
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "Mesh_0.003",
+            "scale" : [
+                3.068310022354126,
+                3.068310022354126,
+                3.068310260772705
+            ],
+            "translation" : [
+                -0.9481902122497559,
+                0.0326959453523159,
+                -0.7083343863487244
+            ]
+        },
+        {
+            "children" : [
+                0
+            ],
+            "name" : "PrinceOfWales.obj.cleaner.materialmerger.gles"
+        },
+        {
+            "children" : [
+                1
+            ],
+            "name" : "RootNode (model correction matrix)",
+            "rotation" : [
+                -0.310608834028244,
+                0.6398875117301941,
+                -0.6242713928222656,
+                0.3230346441268921
+            ],
+            "translation" : [
+                0.15426188707351685,
+                -1.5207356214523315,
+                -1.6355304718017578
+            ]
+        },
+        {
+            "children" : [
+                2
+            ],
+            "name" : "RootNode (gltf orientation matrix)",
+            "rotation" : [
+                -0.7071068286895752,
+                0,
+                0,
+                0.7071068286895752
+            ]
+        }
+    ],
+    "materials" : [
+        {
+            "doubleSided" : true,
+            "emissiveFactor" : [
+                0,
+                0,
+                0
+            ],
+            "name" : "material_0",
+            "normalTexture" : {
+                "index" : 0,
+                "texCoord" : 0
+            },
+            "pbrMetallicRoughness" : {
+                "baseColorTexture" : {
+                    "index" : 1,
+                    "texCoord" : 0
+                },
+                "metallicFactor" : 0,
+                "roughnessFactor" : 1
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Mesh_0.003",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TEXCOORD_0" : 2
+                    },
+                    "indices" : 3,
+                    "material" : 0
+                }
+            ]
+        }
+    ],
+    "textures" : [
+        {
+            "source" : 0
+        },
+        {
+            "source" : 1
+        }
+    ],
+    "images" : [
+        {
+            "mimeType" : "image/png",
+            "name" : "material_0_normal",
+            "uri" : "material_0_normal.png"
+        },
+        {
+            "mimeType" : "image/png",
+            "name" : "material_0_baseColor",
+            "uri" : "material_0_baseColor.png"
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 30767,
+            "max" : [
+                0.7013000249862671,
+                0.39100000262260437,
+                0.42719998955726624
+            ],
+            "min" : [
+                -0.782800018787384,
+                -3.127000093460083,
+                -0.9549999833106995
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 30767,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 30767,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5123,
+            "count" : 176364,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 369204,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 369204,
+            "byteOffset" : 369204
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 246136,
+            "byteOffset" : 738408
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 352728,
+            "byteOffset" : 984544
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 1337272,
+            "uri" : "statu.bin"
+        }
+    ]
+}
