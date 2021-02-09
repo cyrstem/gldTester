@@ -68,6 +68,9 @@ const settings = {
         head_visible2: true,
         pelo_visible2: true,
         nariz_visible2: true
+    },
+    remove: function(){
+        scene.remove(mesh);
     }
    
 };
@@ -75,7 +78,7 @@ const settings = {
     const gui = new GUI();
     let modelos = gui.addFolder(' Models tester');
     modelos.add(selected, 'model',listOfModels).onChange(loadModels)
-
+    gui.add(settings , 'remove');
     let elements = gui.addFolder("Partes A");
     elements.add(settings.elementosA, 'head_visible').onChange(function(show){
         if(show === true){

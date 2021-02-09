@@ -41956,12 +41956,16 @@ function init() {
       head_visible2: true,
       pelo_visible2: true,
       nariz_visible2: true
+    },
+    remove: function remove() {
+      scene.remove(mesh);
     }
   }; //data gui 
 
   var gui = new _datGui.GUI();
   var modelos = gui.addFolder(' Models tester');
   modelos.add(selected, 'model', listOfModels).onChange(loadModels);
+  gui.add(settings, 'remove');
   var elements = gui.addFolder("Partes A");
   elements.add(settings.elementosA, 'head_visible').onChange(function (show) {
     if (show === true) {
@@ -42140,7 +42144,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33715" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36835" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
